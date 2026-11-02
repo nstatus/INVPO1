@@ -1,0 +1,323 @@
+{% extends "base.html" %}
+
+{% block title %}нейро.5 — ИИ без паники. AI-дайджест для новичков{% endblock %}
+{% block description %}Понятный AI-дайджест для новичков: 9 коротких материалов, примеры промптов и никакого снобизма. Пять минут в день — и ИИ перестаёт быть магией.{% endblock %}
+{% block body_class %}page-home{% endblock %}
+
+{% block content %}
+  <!-- ==================== ПЕРВЫЙ ЭКРАН ==================== -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__copy" data-reveal style="--i: 0">
+        <span class="eyebrow">
+          <span class="eyebrow__dot" aria-hidden="true"></span>
+          новый выпуск каждую среду
+        </span>
+
+        <h1>
+          ИИ без
+          <span class="hero__accent">паники.</span>
+        </h1>
+
+        <p class="hero__lead">
+          Понятный дайджест для тех, кто только начинает. Короткие материалы,
+          реальные примеры и ноль снисходительного тона. Пять минут в день —
+          и вы уже понимаете, как это работает.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#materials">
+            Смотреть материалы
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </a>
+          <a class="btn btn--ghost" href="#subscribe">
+            Получать дайджест
+            <svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg>
+          </a>
+        </div>
+
+        <ul class="hero__stats" aria-label="Коротко о дайджесте">
+          <li class="hero__stat">
+            <strong>{{ materials_count }}</strong>
+            <span>материалов</span>
+          </li>
+          <li class="hero__stat">
+            <strong>5</strong>
+            <span>минут в день</span>
+          </li>
+          <li class="hero__stat">
+            <strong>0</strong>
+            <span>сложных слов</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="hero__visual" data-parallax data-reveal style="--i: 2">
+        <span class="hero__orb" aria-hidden="true"></span>
+
+        <div class="visual-float">
+          <div class="digest">
+            <div class="digest__top">
+              <span class="digest__live">
+                <span class="digest__dot" aria-hidden="true"></span>
+                свежий выпуск
+              </span>
+              <span class="digest__number">№ 12</span>
+            </div>
+
+            <h2>Что внутри</h2>
+
+            <ol class="digest__list">
+              <li class="digest__item">
+                <span class="digest__index">01</span>
+                <span class="digest__title">Почему нейросети ошибаются</span>
+                <span class="digest__time">4 мин</span>
+              </li>
+              <li class="digest__item">
+                <span class="digest__index">02</span>
+                <span class="digest__title">Промпт, который экономит час</span>
+                <span class="digest__time">5 мин</span>
+              </li>
+              <li class="digest__item">
+                <span class="digest__index">03</span>
+                <span class="digest__title">3 инструмента на неделю</span>
+                <span class="digest__time">3 мин</span>
+              </li>
+            </ol>
+
+            <a class="digest__footer" href="#materials">
+              <span>{{ materials_count }} материалов в архиве</span>
+              <span class="digest__arrow">
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <span class="chip chip--one" aria-hidden="true">промпты</span>
+        <span class="chip chip--two" aria-hidden="true">без кода</span>
+        <span class="chip chip--three" aria-hidden="true">понятно</span>
+
+        <span class="time-ring" aria-hidden="true">
+          <span>5<small>минут</small></span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== БЕГУЩАЯ СТРОКА ==================== -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <div class="marquee__group">
+        <span>нейросети</span><i>✳</i>
+        <span>промпты</span><i>✳</i>
+        <span>автоматизация</span><i>✳</i>
+        <span>без кода</span><i>✳</i>
+        <span>карьера</span><i>✳</i>
+        <span>понятно</span><i>✳</i>
+      </div>
+      <div class="marquee__group">
+        <span>нейросети</span><i>✳</i>
+        <span>промпты</span><i>✳</i>
+        <span>автоматизация</span><i>✳</i>
+        <span>без кода</span><i>✳</i>
+        <span>карьера</span><i>✳</i>
+        <span>понятно</span><i>✳</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== МАТЕРИАЛЫ ==================== -->
+  <section class="section" id="materials">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <span class="eyebrow">архив знаний</span>
+          <h2>Выбирайте, с чего начать</h2>
+        </div>
+        <p>
+          Девять материалов, которые не нужно читать все сразу.
+          Начните с одного — вернётесь за следующим, когда захочется.
+        </p>
+      </div>
+
+      <div class="cards">
+        {% for m in materials %}
+          {% set show_featured = true %}
+          {% include "_card.html" %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== КАК УЧИТЬСЯ ==================== -->
+  <section class="section section--how" id="how">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <span class="eyebrow">как это работает</span>
+          <h2>Без курсов на 40 часов</h2>
+        </div>
+        <p>
+          Мы не обещаем сделать вас инженером за неделю. Но поможем перестать
+          бояться ИИ и начать использовать его там, где он действительно полезен.
+        </p>
+      </div>
+
+      <div class="steps">
+        <article class="step" data-reveal style="--accent: #d8ff4f; --i: 0">
+          <span class="step__num" aria-hidden="true">01</span>
+          <h3>Выберите один материал</h3>
+          <p>
+            Не пытайтесь пройти всё за вечер. Начните с того, что ближе
+            к вашей работе или любопытству. Одного текста достаточно.
+          </p>
+        </article>
+
+        <article class="step" data-reveal style="--accent: #5ee7f2; --i: 1">
+          <span class="step__num" aria-hidden="true">02</span>
+          <h3>Попробуйте сразу</h3>
+          <p>
+            К каждому материалу — простой пример. Повторите его в любом
+            бесплатном чате с ИИ. Пять минут практики лучше часа теории.
+          </p>
+        </article>
+
+        <article class="step" data-reveal style="--accent: #a78bfa; --i: 2">
+          <span class="step__num" aria-hidden="true">03</span>
+          <h3>Возвращайтесь за следующим</h3>
+          <p>
+            Раз в неделю — новый разбор. Без давления, дедлайнов
+            и чувства, что вы отстали от прогресса.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ПОДПИСКА ==================== -->
+  <section class="section section--subscribe" id="subscribe">
+    <div class="container">
+      <div class="subscribe" data-reveal>
+        <div class="subscribe__copy">
+          <span class="eyebrow">письмо по средам</span>
+          <h2>Один материал.<br>Пять минут.<br><span>Ноль паники.</span></h2>
+          <p>
+            Раз в неделю присылаем короткий разбор, один полезный промпт
+            и ссылку на материал из архива. Никакого спама и «срочных
+            предложений».
+          </p>
+
+          <form class="subscribe__form" action="{{ url_for('subscribe') }}" method="post" data-subscribe-form>
+            <label class="sr-only" for="email">Ваша электронная почта</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="ваша@почта.ру"
+              autocomplete="email"
+              maxlength="120"
+              required
+            >
+            <button class="btn btn--primary" type="submit">
+              Хочу дайджест
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+            </button>
+          </form>
+
+          <small class="subscribe__note">
+            Без спама. Отписаться можно одним кликом. Адрес почты никому не передаём.
+          </small>
+        </div>
+
+        <div class="subscribe__art" aria-hidden="true">
+          <span class="subscribe__ring"></span>
+          <div class="letter">
+            <span class="letter__stamp">
+              <svg class="icon"><use href="#i-sparkles"></use></svg>
+            </span>
+            <div class="letter__top">
+              <span>нейро.5</span>
+              <span>выпуск № 13</span>
+            </div>
+            <span class="letter__line letter__line--wide"></span>
+            <span class="letter__line"></span>
+            <span class="letter__line letter__line--short"></span>
+            <span class="letter__divider"></span>
+            <span class="letter__line letter__line--accent"></span>
+            <span class="letter__line"></span>
+            <span class="letter__line letter__line--short"></span>
+            <span class="letter__sign">до встречи в среду →</span>
+          </div>
+          <span class="subscribe__chip">5 минут</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ЧАСТЫЕ ВОПРОСЫ ==================== -->
+  <section class="section section--faq" id="faq">
+    <div class="container faq">
+      <div class="faq__intro" data-reveal>
+        <span class="eyebrow">частые вопросы</span>
+        <h2>Вопросы, которые стесняются задать</h2>
+        <p>
+          Если вашего вопроса здесь нет — просто начните с любого материала.
+          Скорее всего, ответ появится сам.
+        </p>
+      </div>
+
+      <div class="faq__list" data-reveal>
+        <details class="faq__item" open>
+          <summary>
+            <span>Это платно?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <svg class="icon"><use href="#i-plus"></use></svg>
+            </span>
+          </summary>
+          <p>Нет. Все материалы и дайджест бесплатны. Мы не продаём курсы и не прячем основное за подпиской.</p>
+        </details>
+
+        <details class="faq__item">
+          <summary>
+            <span>Я совсем не технарь. Пойму?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <svg class="icon"><use href="#i-plus"></use></svg>
+            </span>
+          </summary>
+          <p>Да. Мы объясняем на бытовых примерах и расшифровываем каждый термин. Если где-то нужен код — честно предупреждаем.</p>
+        </details>
+
+        <details class="faq__item">
+          <summary>
+            <span>Нужно ли что-то устанавливать?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <svg class="icon"><use href="#i-plus"></use></svg>
+            </span>
+          </summary>
+          <p>Нет. Достаточно браузера. Все примеры можно повторить в бесплатной версии чат-бота. Платный тариф для старта не нужен.</p>
+        </details>
+
+        <details class="faq__item">
+          <summary>
+            <span>Сколько времени это занимает?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <svg class="icon"><use href="#i-plus"></use></svg>
+            </span>
+          </summary>
+          <p>Один материал — от 3 до 8 минут. Можно читать в очереди или за кофе. Не обязательно возвращаться каждый день.</p>
+        </details>
+
+        <details class="faq__item">
+          <summary>
+            <span>Вы рекламируете конкретные сервисы?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <svg class="icon"><use href="#i-plus"></use></svg>
+            </span>
+          </summary>
+          <p>Нет. Рассказываем о том, чем пользуемся сами, и честно говорим об ограничениях. Названия моделей нужны, чтобы вы могли попробовать.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}{{ material.title }} — нейро.5{% endblock %}
+{% block description %}{{ material.description }}{% endblock %}
+{% block body_class %}page-article{% endblock %}
+
+{% block content %}
+<div class="article-page" style="--accent: {{ material.accent }}">
+  <div class="reading-progress" aria-hidden="true">
+    <span data-reading-progress></span>
+  </div>
+
+  <!-- ==================== ШАПКА МАТЕРИАЛА ==================== -->
+  <article class="article-hero">
+    <div class="container">
+      <a class="back-link" href="{{ url_for('index') }}#materials">
+        <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"></use></svg>
+        Все материалы
+      </a>
+
+      <div class="article-hero__top">
+        <span class="article-chip">{{ material.category }}</span>
+        <span class="article-hero__num">материал № {{ material.num }}</span>
+      </div>
+
+      <h1>{{ material.title }}</h1>
+      <p class="article-hero__lead">{{ material.lead }}</p>
+
+      <div class="article-hero__meta">
+        <span>
+          <svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg>
+          {{ material.minutes }} минут чтения
+        </span>
+        <span>
+          <svg class="icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>
+          {{ material.level }}
+        </span>
+        <span class="article-hero__author">
+          <span class="article-hero__author-mark" aria-hidden="true">5</span>
+          редакция нейро.5
+        </span>
+      </div>
+
+      <div class="article-cover" aria-hidden="true">
+        <span class="article-cover__grid"></span>
+        <div class="article-cover__copy">
+          <span class="article-cover__eyebrow">
+            <span class="article-cover__pulse"></span>
+            нейро.5 / материал {{ material.num }}
+          </span>
+          <span class="article-cover__title">{{ material.category }}</span>
+          <span class="article-cover__caption">{{ material.minutes }} минут чтения · {{ material.level }}</span>
+        </div>
+        <div class="article-cover__visual">
+          <span class="article-cover__orbit"></span>
+          <span class="article-cover__orbit article-cover__orbit--inner"></span>
+          <span class="article-cover__badge">
+            <svg class="icon article-cover__icon"><use href="#i-{{ material.icon }}"></use></svg>
+          </span>
+          <span class="article-cover__spark article-cover__spark--1"></span>
+          <span class="article-cover__spark article-cover__spark--2"></span>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ==================== ТЕКСТ + СОДЕРЖАНИЕ ==================== -->
+  <div class="container">
+    <div class="article-body">
+      <aside class="article-aside">
+        <p class="aside__label">В этом материале</p>
+        <nav class="toc" aria-label="Содержание материала">
+          {% for section in material.sections %}
+            <a href="#section-{{ loop.index }}">{{ section.heading }}</a>
+          {% endfor %}
+        </nav>
+
+        <div class="aside__note">
+          <span class="aside__note-mark" aria-hidden="true">5</span>
+          <p>Один выпуск — пять минут. Раз в неделю, без давления.</p>
+          <a href="{{ url_for('index') }}#subscribe">
+            Получать по средам
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </a>
+        </div>
+      </aside>
+
+      <div class="prose">
+        {% for section in material.sections %}
+          <section class="prose-section" id="section-{{ loop.index }}">
+            <h2>
+              <span>{{ "0" if loop.index < 10 else "" }}{{ loop.index }}</span>
+              {{ section.heading }}
+            </h2>
+
+            {% for paragraph in section.paragraphs %}
+              <p>{{ paragraph }}</p>
+            {% endfor %}
+
+            {% if section.list %}
+              <ul class="checklist">
+                {% for item in section.list %}
+                  <li>
+                    <svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>
+                    <span>{{ item }}</span>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            {% if section.terms %}
+              <dl class="terms">
+                {% for item in section.terms %}
+                  <div>
+                    <dt>{{ item.term }}</dt>
+                    <dd>{{ item.definition }}</dd>
+                  </div>
+                {% endfor %}
+              </dl>
+            {% endif %}
+
+            {% if section.example %}
+              <div class="prompt-box">
+                <span class="prompt-box__label">Пример запроса</span>
+                <p>{{ section.example }}</p>
+              </div>
+            {% endif %}
+
+            {% if section.tip %}
+              <div class="tip">
+                <svg class="icon" aria-hidden="true"><use href="#i-sparkles"></use></svg>
+                <p>{{ section.tip }}</p>
+              </div>
+            {% endif %}
+          </section>
+        {% endfor %}
+
+        <div class="takeaways">
+          <span class="eyebrow">забрать с собой</span>
+          <h2>Главное из материала</h2>
+          <ul>
+            {% for item in material.takeaways %}
+              <li>
+                <svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>{{ item }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="article-cta">
+          <div>
+            <h3>Продолжить без паники</h3>
+            <p>Раз в неделю — один короткий разбор и один полезный промпт.</p>
+          </div>
+          <a class="btn btn--primary" href="{{ url_for('index') }}#subscribe">
+            Подписаться
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ЧИТАТЬ ДАЛЬШЕ ==================== -->
+  <section class="section section--related">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <span class="eyebrow">читать дальше</span>
+          <h2>Следующий шаг</h2>
+        </div>
+        <p>Три материала, с которыми логично продолжить. Или вернитесь к архиву и выберите сами.</p>
+      </div>
+
+      <div class="cards">
+        {% for m in related %}
+          {% set show_featured = false %}
+          {% include "_card.html" %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

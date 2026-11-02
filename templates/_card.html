@@ -1,0 +1,43 @@
+{% set is_featured = m.featured|default(false) and show_featured|default(true) %}
+<a
+  class="card{% if is_featured %} card--featured{% endif %}"
+  href="{{ url_for('material_page', slug=m.slug) }}"
+  style="--accent: {{ m.accent }}; --i: {{ m.num|int }}"
+  data-reveal
+>
+  <div class="card__top">
+    <span class="card__index">№ {{ m.num }}</span>
+    <span class="card__tag">{{ m.category }}</span>
+  </div>
+
+  <div class="card__body">
+    <span class="card__icon" aria-hidden="true">
+      <svg class="icon"><use href="#i-{{ m.icon }}"></use></svg>
+    </span>
+    <h3>{{ m.title }}</h3>
+    <p>{{ m.description }}</p>
+  </div>
+
+  {% if is_featured %}
+    <span class="card__art" aria-hidden="true">
+      <span class="card__art-orbit"></span>
+      <span class="card__art-core">
+        <svg class="icon"><use href="#i-{{ m.icon }}"></use></svg>
+      </span>
+      <span class="card__art-label">начните здесь</span>
+    </span>
+  {% endif %}
+
+  <div class="card__bottom">
+    <span class="card__meta">
+      <svg class="icon" aria-hidden="true"><use href="#i-clock"></use></svg>
+      {{ m.minutes }} мин
+      <span class="dot" aria-hidden="true"></span>
+      {{ m.level }}
+    </span>
+    <span class="card__cta">
+      Открыть материал
+      <svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg>
+    </span>
+  </div>
+</a>

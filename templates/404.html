@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Страница не найдена — нейро.5{% endblock %}
+{% block body_class %}page-error{% endblock %}
+
+{% block content %}
+<section class="not-found">
+  <div class="container">
+    <span class="not-found__code" aria-hidden="true">404</span>
+    <span class="eyebrow">страница потерялась</span>
+    <h1>Такой страницы нет.<br>Но материалы — есть.</h1>
+    <p>
+      Возможно, ссылка устарела или в адресе опечатка. Ничего страшного:
+      в архиве девять материалов, и один из них точно подойдёт.
+    </p>
+    <a class="btn btn--primary" href="{{ url_for('index') }}#materials">
+      К материалам
+      <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+    </a>
+  </div>
+</section>
+{% endblock %}

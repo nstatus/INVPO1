@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}нейро.5 — AI-дайджест для новичков{% endblock %}</title>
+  <meta name="description" content="{% block description %}Короткие и понятные материалы об искусственном интеллекте для новичков. Пять минут в день — и ИИ перестаёт быть магией.{% endblock %}">
+  <meta name="theme-color" content="#07070b">
+
+  <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  {% block head %}{% endblock %}
+
+  <noscript>
+    <style>[data-reveal] { opacity: 1 !important; translate: 0 0 !important; }</style>
+  </noscript>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <div class="site-bg" aria-hidden="true">
+    <span class="bg-grid"></span>
+    <span class="bg-noise"></span>
+  </div>
+
+  <!-- Иконки хранятся в одном месте и используются через <use>. -->
+  <svg class="svg-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-sparkles" viewBox="0 0 24 24">
+      <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>
+      <path d="M5 3v4M19 17v4M3 5h4M17 19h4"/>
+    </symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24">
+      <polyline points="4 17 10 11 4 5"/>
+      <line x1="12" x2="20" y1="19" y2="19"/>
+    </symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"/>
+      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24">
+      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/>
+      <path d="M12 9v4M12 17h.01"/>
+    </symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+    </symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24">
+      <circle cx="13.5" cy="6.5" r=".7" fill="currentColor" stroke="none"/>
+      <circle cx="17.5" cy="10.5" r=".7" fill="currentColor" stroke="none"/>
+      <circle cx="8.5" cy="7.5" r=".7" fill="currentColor" stroke="none"/>
+      <circle cx="6.5" cy="12.5" r=".7" fill="currentColor" stroke="none"/>
+      <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.65-.75 1.65-1.69 0-.44-.18-.84-.44-1.13-.29-.29-.44-.65-.44-1.12a1.64 1.64 0 0 1 1.67-1.67h2c3.05 0 5.56-2.5 5.56-5.55C21.97 6.01 17.46 2 12 2Z"/>
+    </symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24">
+      <rect width="20" height="14" x="2" y="7" rx="2"/>
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+    </symbol>
+    <symbol id="i-book" viewBox="0 0 24 24">
+      <path d="M12 7v14"/>
+      <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10"/>
+      <polyline points="12 6 12 12 16 14"/>
+    </symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24">
+      <path d="M7 7h10v10M7 17 17 7"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="M20 6 9 17l-5-5"/>
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 6h16M4 12h16M4 18h16"/>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path d="M18 6 6 18M6 6l12 12"/>
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect width="20" height="16" x="2" y="4" rx="2"/>
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+    </symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24">
+      <path d="m6 9 6 6 6-6"/>
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24">
+      <path d="M12 5v14M5 12h14"/>
+    </symbol>
+  </svg>
+
+  <header class="site-header" id="top">
+    <div class="container header__inner">
+      <a class="logo" href="{{ url_for('index') }}" aria-label="5 нейро.5 AI-дайджест для новичков — на главную">
+        <span class="logo__mark" aria-hidden="true">5</span>
+        <span class="logo__text">
+          <span class="logo__word">нейро<span class="logo__dot">.</span><span class="logo__five">5</span></span>
+          <span class="logo__sub">AI-дайджест для новичков</span>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a class="nav__link" href="{{ url_for('index') }}#materials">Материалы</a>
+        <a class="nav__link" href="{{ url_for('index') }}#how">Как учиться</a>
+        <a class="nav__link" href="{{ url_for('index') }}#faq">Вопросы</a>
+        <a class="btn btn--primary btn--small nav__cta" href="{{ url_for('index') }}#subscribe">Подписаться</a>
+      </nav>
+
+      <button class="nav-toggle" type="button" aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">
+        <svg class="icon nav-toggle__open" aria-hidden="true"><use href="#i-menu"></use></svg>
+        <svg class="icon nav-toggle__close" aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+    </div>
+  </header>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="toasts" aria-live="polite">
+        {% for category, message in messages %}
+          <div class="toast toast--{{ category }}" data-toast role="status">
+            <span class="toast__icon">
+              <svg class="icon" aria-hidden="true">
+                <use href="#i-{{ 'alert' if category == 'error' else 'check' }}"></use>
+              </svg>
+            </span>
+            <p>{{ message }}</p>
+            <button class="toast__close" type="button" aria-label="Закрыть сообщение" data-toast-close>
+              <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+            </button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a class="logo logo--footer" href="{{ url_for('index') }}" aria-label="5 нейро.5 AI-дайджест для новичков — на главную">
+            <span class="logo__mark" aria-hidden="true">5</span>
+            <span class="logo__text">
+              <span class="logo__word">нейро<span class="logo__dot">.</span><span class="logo__five">5</span></span>
+              <span class="logo__sub">AI-дайджест для новичков</span>
+            </span>
+          </a>
+          <p class="footer__tagline">Сделано, чтобы искусственный интеллект стал понятнее. Без паники, курсов на 40 часов и снобизма.</p>
+        </div>
+
+        <nav class="footer__links" aria-label="Навигация в подвале">
+          <a href="{{ url_for('index') }}#materials">Материалы</a>
+          <a href="{{ url_for('index') }}#how">Как учиться</a>
+          <a href="{{ url_for('index') }}#faq">Вопросы</a>
+          <a href="{{ url_for('index') }}#subscribe">Подписаться</a>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© {{ current_year }} нейро.5</span>
+        <span>Пять минут в день. Ноль сложных слов.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>
